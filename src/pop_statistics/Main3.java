@@ -84,7 +84,7 @@ public class Main3
       csv.addRow( row );
     }
 
-    csv.print( "results/DecesParAge.csv" );
+    csv.print( "docs/results/DecesParAge.csv" );
   }
 
 
@@ -169,7 +169,7 @@ public class Main3
         csv.addRow( row );
       }
     }
-    csv.print( "results/DecesParSemaineEtClasseAge.csv" );
+    csv.print( "docs/results/DecesParSemaineEtClasseAge.csv" );
   }
 
 
@@ -212,7 +212,7 @@ public class Main3
         csv.addRow( date, pop, death, rate, normalisedRate );
       }
     }
-    csv.print( "results/DecesParSemaine.csv" );
+    csv.print( "docs/results/DecesParSemaine.csv" );
   }
 
 
@@ -251,18 +251,18 @@ public class Main3
 
       csv.addRow( year, pop, death, rate, normalisedRate );
     }
-    csv.print( "results/DecesParAn.csv" );
+    csv.print( "docs/results/DecesParAn.csv" );
   }
 
 
 
   public static void main(String[] args) throws Exception
   {
-    pyramids = AgePyramid.load( "results/PyramideDesAgesHommes.csv",
-        "results/PyramideDesAgesFemmes.csv" );
+    pyramids = AgePyramid.load( "docs/results/PyramideDesAgesHommes.csv",
+        "docs/results/PyramideDesAgesFemmes.csv" );
     // stats = loadDeathFromData();
-    // stats.saveToJson( "results/death-stats.json" );
-    stats = DeathStats.loadFromJson( "results/death-stats.json" );
+    // stats.saveToJson( "docs/results/death-stats.json" );
+    stats = DeathStats.loadFromJson( "docs/results/death-stats.json" );
 
     printDeathPerWeek( 2021 );
     printDeathPerYear( 2021 );
