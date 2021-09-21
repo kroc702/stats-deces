@@ -38,9 +38,15 @@ public class Csv
     List<String> row = new ArrayList<String>();
     for( Object value : values )
     {
-      if( value instanceof Float || value instanceof Double )
+      if( value instanceof Float )
       {
-        row.add( String.valueOf( value ).replace( '.', ',' ) );
+        row.add( String.valueOf( Math.round( (Float)value ) ) );
+        // row.add( String.valueOf( value ).replace( '.', ',' ) );
+      }
+      else if( value instanceof Double )
+      {
+        row.add( String.valueOf( Math.round( (Double)value ) ) );
+        // row.add( String.valueOf( value ).replace( '.', ',' ) );
       }
       else if( value instanceof Collection )
       {
@@ -103,21 +109,32 @@ public class Csv
   {
     if( colHeaders.size() > 0 )
     {
-      for( String header : colHeaders )
+      for( int i = 0; i < colHeaders.size(); i++ )
       {
-        stream.print( header );
-        stream.print( ';' );
+        {
+          String header = colHeaders.get( i );
+          stream.print( header );
+          if( i + 1 < colHeaders.size() )
+          {
+            stream.print( ';' );
+          }
+        }
       }
       stream.println();
     }
     for( List<String> row : data )
     {
-      for( String value : row )
+      for( int i = 0; i < row.size(); i++ )
       {
+        String value = row.get( i );
         stream.print( value );
-        stream.print( ';' );
+        if( i + 1 < row.size() )
+        {
+          stream.print( ';' );
+        }
       }
       stream.println();
     }
   }
 }
+

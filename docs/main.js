@@ -4,63 +4,228 @@ var chartColors = {
 };
 
 var color = Chart.helpers.color;
-var config = {
-	type: 'bar',
-	data: {
-		datasets: [{
-			type: 'line',
-			yAxisID: 'temperature',
-			backgroundColor: 'transparent',
-			borderColor: chartColors.red,
-			pointBackgroundColor: chartColors.red,
-			tension: 0,
-			fill: false
-		}, {
-			yAxisID: 'precipitation',
-			backgroundColor: color(chartColors.blue).alpha(0.5).rgbString(),
-			borderColor: 'transparent'
-		}]
-	},
-	plugins: [ChartDataSource],
-	options: {
-		title: {
-			display: true,
-			text: 'CSV data source (dataset) sample'
-		},
-		scales: {
-			xAxes: [{
-				scaleLabel: {
-					display: true,
-					labelString: 'Month'
-				}
-			}],
-			yAxes: [{
-				id: 'temperature',
+Chart.defaults.global.elements.line.backgroundColor = 'transparent';
+Chart.defaults.global.elements.point.borderColor = 'transparent';
+Chart.defaults.global.elements.point.backgroundColor = 'transparent';
+
+var yAxes= [{
+				id: 'deces',
+				beginAtZero: true,
 				gridLines: {
 					drawOnChartArea: false
 				},
 				scaleLabel: {
 					display: true,
-					labelString: 'Temperature (°C)'
+					labelString: 'Nombre de décès'
 				}
 			}, {
-				id: 'precipitation',
+				id: 'taux',
+				beginAtZero: true,
 				position: 'right',
 				gridLines: {
 					drawOnChartArea: false
 				},
 				scaleLabel: {
 					display: true,
-					labelString: 'Precipitation (mm)'
+					labelString: 'Taux (deces/1M d\'hab)'
+				}
+			}];
+
+var configDecesParAn = {
+	type: 'line',
+	data: {
+		datasets: [{
+			hidden: true,
+			yAxisID: 'deces',
+			borderColor: chartColors.red
+		}, {
+			yAxisID: 'deces',
+			borderColor: chartColors.red
+		}, {
+			hidden: true,
+			yAxisID: 'taux',
+			borderColor: chartColors.blue
+		}, {
+			yAxisID: 'taux',
+			borderColor: chartColors.blue
+		}]
+	},
+	plugins: [ChartDataSource],
+	options: {
+		scales: {
+			xAxes: [{
+				scaleLabel: {
+					display: true,
+					labelString: 'Annee'
+				}
+			}],
+			yAxes: yAxes
+		},
+		plugins: {
+			datasource: {
+				type: 'csv',
+				url: 'results/DecesParAn.csv',
+				delimiter: ';',
+				rowMapping: 'index',
+				datasetLabels: true,
+				indexLabels: true
+			}
+		}
+	}
+};
+
+var configDecesParSemaine = {
+	type: 'line',
+	data: {
+		datasets: [{
+			hidden: true,
+			yAxisID: 'deces',
+			borderColor: chartColors.red,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		}, {
+			yAxisID: 'deces',
+			borderColor: chartColors.red,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		}, {
+			hidden: true,
+			yAxisID: 'taux',
+			borderColor: chartColors.blue,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		}, {
+			yAxisID: 'taux',
+			borderColor: chartColors.blue,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		}]
+	},
+	plugins: [ChartDataSource],
+	options: {
+		scales: {
+			xAxes: {
+				scaleLabel: {
+					display: true,
+					labelString: 'semaine'
+				}
+			},
+			yAxes: yAxes
+		},
+		plugins: {
+			datasource: {
+				type: 'csv',
+				url: 'results/DecesParSemaine.csv',
+				delimiter: ';',
+				rowMapping: 'index',
+				datasetLabels: true,
+				indexLabels: true
+			}
+		}
+	}
+};
+
+var configDecesParAge = {
+	type: 'line',
+	data: {
+		datasets: [{
+			hidden: false
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: false
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: false
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: true
+		},{
+			hidden: false,
+			borderColor: chartColors.blue,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		},{
+			hidden: false,
+			borderColor: chartColors.red,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		},{
+			hidden: true
+		}]
+	},
+	plugins: [ChartDataSource],
+	options: {
+		scales: {
+			xAxes: [{
+				scaleLabel: {
+					display: true,
+					labelString: 'Age'
+				}
+			}],
+			yAxes: [{
+				id: 'taux',
+				beginAtZero: true,
+				type: 'logarithmic',
+				gridLines: {
+					drawOnChartArea: false
+				},
+				scaleLabel: {
+					display: true,
+					labelString: 'Taux (deces/1M d\'hab)'
 				}
 			}]
 		},
 		plugins: {
 			datasource: {
 				type: 'csv',
-				url: 'sample-dataset.csv',
-				delimiter: ',',
-				rowMapping: 'dataset',
+				url: 'results/DecesParAge.csv',
+				delimiter: ';',
+				rowMapping: 'index',
 				datasetLabels: true,
 				indexLabels: true
 			}
@@ -69,6 +234,13 @@ var config = {
 };
 
 window.onload = function() {
-	var ctx = document.getElementById('myChart').getContext('2d');
-	window.myChart = new Chart(ctx, config);
+	var ctx = document.getElementById('DecesParAn').getContext('2d');
+	new Chart(ctx, configDecesParAn);
+
+	var ctx = document.getElementById('DecesParSemaine').getContext('2d');
+	new Chart(ctx, configDecesParSemaine);
+
+	var ctx = document.getElementById('DecesParAge').getContext('2d');
+	new Chart(ctx, configDecesParAge);
 };
+

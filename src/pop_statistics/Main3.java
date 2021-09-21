@@ -177,7 +177,7 @@ public class Main3
   {
     Csv csv = new Csv( "semaine", "population", "deces", "taux",
         "taux normalise " + normalisedYear );
-    for( int year = 1991; year <= 2021; year++ )
+    for( int year = 2011; year <= 2021; year++ )
     {
       for( int day = 1; day < DeathStats.MAX_DAY_COUNT - 6; day += 7 )
       {
