@@ -1,32 +1,32 @@
-liste des décès
+liste des dï¿½cï¿½s
 ===============
 https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/
 
 Le fichier est fourni au format txt
 
-Nom et Prénom - Longueur : 80 - Position : 1-80 - Type : Alphanumérique
-La forme générale est NOM*PRENOMS
+Nom et Prï¿½nom - Longueur : 80 - Position : 1-80 - Type : Alphanumï¿½rique
+La forme gï¿½nï¿½rale est NOM*PRENOMS
 
-Sexe - Longueur : 1 - Position : 81 - Type : Numérique
-1 = Masculin; 2 = féminin
+Sexe - Longueur : 1 - Position : 81 - Type : Numï¿½rique
+1 = Masculin; 2 = fï¿½minin
 
-Date de naissance - Longueur : 8 - Position : 82-89 - Type : Numérique
-Forme : AAAAMMJJ - AAAA=0000 si année inconnue; MM=00 si mois inconnu; JJ=00 si jour inconnu
+Date de naissance - Longueur : 8 - Position : 82-89 - Type : Numï¿½rique
+Forme : AAAAMMJJ - AAAA=0000 si annï¿½e inconnue; MM=00 si mois inconnu; JJ=00 si jour inconnu
 
-Code du lieu de naissance - Longueur : 5 - Position : 90-94 - Type : Alphanumérique
-Code Officiel Géographique en vigueur au moment de la prise en compte du décès
+Code du lieu de naissance - Longueur : 5 - Position : 90-94 - Type : Alphanumï¿½rique
+Code Officiel Gï¿½ographique en vigueur au moment de la prise en compte du dï¿½cï¿½s
 
-Commune de naissance en clair - Longueur : 30 - Position : 95-124 - Type : Alphanumérique
+Commune de naissance en clair - Longueur : 30 - Position : 95-124 - Type : Alphanumï¿½rique
 
-DOM/TOM/COM/Pays de naissance en clair - Longueur : 30 - Position : 125-154 - Type : Alphanumérique
+DOM/TOM/COM/Pays de naissance en clair - Longueur : 30 - Position : 125-154 - Type : Alphanumï¿½rique
 
-Date de décès - Longueur : 8 - Position : 155-162 - Type : Numérique
-Forme : AAAAMMJJ - AAAA=0000 si année inconnue; MM=00 si mois inconnu; JJ=00 si jour inconnu
+Date de dï¿½cï¿½s - Longueur : 8 - Position : 155-162 - Type : Numï¿½rique
+Forme : AAAAMMJJ - AAAA=0000 si annï¿½e inconnue; MM=00 si mois inconnu; JJ=00 si jour inconnu
 
-Code du lieu de décès - Longueur : 5 - Position : 163-167 - Type : Alphanumérique
-Code Officiel Géographique en vigueur au moment de la prise en compte du décès
+Code du lieu de dï¿½cï¿½s - Longueur : 5 - Position : 163-167 - Type : Alphanumï¿½rique
+Code Officiel Gï¿½ographique en vigueur au moment de la prise en compte du dï¿½cï¿½s
 
-Numéro d'acte de décès - Longueur : 9 - Position : 168-176 - Type : Alphanumérique
+Numï¿½ro d'acte de dï¿½cï¿½s - Longueur : 9 - Position : 168-176 - Type : Alphanumï¿½rique
 
 
 une doc ici https://www.insee.fr/fr/statistiques/4487854#documentation-sommaire
@@ -38,11 +38,11 @@ https://www.insee.fr/fr/statistiques/1892117?sommaire=1912926
 
 pyramide des ages
 =================
-https://www.insee.fr/fr/statistiques/2381472#graphique-figure1
+https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm#!
 1991-2020:
 https://www.insee.fr/fr/statistiques/3312958
 2021:
-https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm#!
+https://www.insee.fr/fr/statistiques/2381472#graphique-figure1
 
 
 naissances 
@@ -53,7 +53,7 @@ https://www.insee.fr/fr/statistiques/2381380#graphique-figure1
 https://www.insee.fr/fr/statistiques/5413376?sommaire=5348638#graphique-figure1
 
 
-calcul du taux normalisé par ages
+calcul du taux normalisï¿½ par ages
 =================================
 https://www.statcan.gc.ca/fra/quo/bdd/tnsa
 

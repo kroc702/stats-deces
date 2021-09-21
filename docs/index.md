@@ -4,6 +4,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datasource@0.1.0"></script>
 <script src="main.js"></script>
+<style>
+#main_content {
+    max-width: fit-content;
+</style>
+
 
 ## Décès par an
 <div><canvas id="DecesParAn"></canvas></div>
@@ -25,9 +30,10 @@ La taux de décès pour chaque age.
 
 ## Sources
 
-- La liste des décès: https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/
-- pyramide des ages 1991-2020: https://www.insee.fr/fr/statistiques/3312958
-- pyramide des ages 2021: https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm
+- [La liste des décès](https://www.data.gouv.fr/fr/datasets/fichier-des-personnes-decedees/)
+- [pyramide des ages](https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm)
+- [pyramide des ages 1991-2020](https://www.insee.fr/fr/statistiques/3312958)
+- [pyramide des ages 2021](https://www.insee.fr/fr/statistiques/2381472#graphique-figure1)
 
 
 
