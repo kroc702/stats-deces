@@ -15,45 +15,44 @@ public class Main3
   static Map<Integer, AgePyramid> pyramids = new HashMap<Integer, AgePyramid>();
 
 
-
   public static DeathStats loadDeathFromData() throws Exception
   {
+    final String inputFolder = "E:/perso/data-deces/";
     DeathStats stats = new DeathStats( 1991, 2021 );
-    stats.loadDeathRecords( "data/deces-1991.txt" );
-    stats.loadDeathRecords( "data/deces-1992.txt" );
-    stats.loadDeathRecords( "data/deces-1993.txt" );
-    stats.loadDeathRecords( "data/deces-1994.txt" );
-    stats.loadDeathRecords( "data/deces-1995.txt" );
-    stats.loadDeathRecords( "data/deces-1996.txt" );
-    stats.loadDeathRecords( "data/deces-1997.txt" );
-    stats.loadDeathRecords( "data/deces-1998.txt" );
-    stats.loadDeathRecords( "data/deces-1999.txt" );
-    stats.loadDeathRecords( "data/deces-2000.txt" );
-    stats.loadDeathRecords( "data/deces-2001.txt" );
-    stats.loadDeathRecords( "data/deces-2002.txt" );
-    stats.loadDeathRecords( "data/deces-2003.txt" );
-    stats.loadDeathRecords( "data/deces-2004.txt" );
-    stats.loadDeathRecords( "data/deces-2005.txt" );
-    stats.loadDeathRecords( "data/deces-2006.txt" );
-    stats.loadDeathRecords( "data/deces-2007.txt" );
-    stats.loadDeathRecords( "data/deces-2008.txt" );
-    stats.loadDeathRecords( "data/deces-2009.txt" );
-    stats.loadDeathRecords( "data/deces-2010.txt" );
-    stats.loadDeathRecords( "data/deces-2011.txt" );
-    stats.loadDeathRecords( "data/deces-2012.txt" );
-    stats.loadDeathRecords( "data/deces-2013.txt" );
-    stats.loadDeathRecords( "data/deces-2014.txt" );
-    stats.loadDeathRecords( "data/deces-2015.txt" );
-    stats.loadDeathRecords( "data/deces-2016.txt" );
-    stats.loadDeathRecords( "data/deces-2017.txt" );
-    stats.loadDeathRecords( "data/deces-2018.txt" );
-    stats.loadDeathRecords( "data/deces-2019.txt" );
-    stats.loadDeathRecords( "data/deces-2020.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1991.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1992.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1993.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1994.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1995.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1996.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1997.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1998.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-1999.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2000.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2001.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2002.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2003.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2004.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2005.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2006.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2007.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2008.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2009.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2010.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2011.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2012.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2013.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2014.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2015.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2016.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2017.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2018.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2019.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2020.txt" );
 
-    stats.loadDeathRecords( "data/deces-2021-t1.txt" );
-    stats.loadDeathRecords( "data/deces-2021-t2.txt" );
-    stats.loadDeathRecords( "data/deces-2021-m07.txt" );
-    stats.loadDeathRecords( "data/deces-2021-m08.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2021-t1.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2021-t2.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2021-t3.txt" );
 
     return stats;
   }
@@ -177,7 +176,7 @@ public class Main3
   {
     Csv csv = new Csv( "semaine", "population", "deces", "taux",
         "taux normalise " + normalisedYear );
-    for( int year = 2011; year <= 2021; year++ )
+    for( int year = 2015; year <= 2021; year++ )
     {
       for( int day = 1; day < DeathStats.MAX_DAY_COUNT - 6; day += 7 )
       {
