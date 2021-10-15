@@ -14,6 +14,8 @@ public class Main3
   static DeathStats stats = null;
   static Map<Integer, AgePyramid> pyramids = new HashMap<Integer, AgePyramid>();
 
+  static int lastYear = 2021;
+
 
   public static DeathStats loadDeathFromData() throws Exception
   {
@@ -61,6 +63,8 @@ public class Main3
 
   public static void printDeathPerAge() throws IOException
   {
+    float extrapolation = (float)DeathStats.MAX_DAY_COUNT
+        / (DeathStats.MAX_DAY_COUNT - stats.countDayWithoutDeath( lastYear ));
     Csv csv = new Csv( "Age", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998",
         "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
         "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020",
@@ -69,7 +73,7 @@ public class Main3
     {
       List<Object> row = new ArrayList<Object>();
       row.add( age );
-      for( int year = 1991; year <= 2021; year++ )
+      for( int year = 1991; year <= lastYear; year++ )
       {
         long death = stats.getDeath( year, 0, DeathStats.MAX_DAY_COUNT, age, age, null );
         if( age == AgePyramid.MAX_AGE )
@@ -78,7 +82,14 @@ public class Main3
               null );
         }
         long pop = pyramids.get( year ).get( age, age, null );
-        row.add( death * 1000000f / pop );
+        if( year == lastYear )
+        {
+          row.add( extrapolation * death * 1000000f / pop );
+        }
+        else
+        {
+          row.add( death * 1000000f / pop );
+        }
       }
       csv.addRow( row );
     }
@@ -91,7 +102,7 @@ public class Main3
   {
     Csv csv = new Csv( "semaine \\ age", "0", "1-10", "11-20", "21-30", "31-40", "41-50", "51-60",
         "61-70", "71-80", "81-90", "90+" );
-    for( int year = 2019; year <= 2021; year++ )
+    for( int year = 2019; year <= lastYear; year++ )
     {
       for( int day = 1; day < DeathStats.MAX_DAY_COUNT - 6; day += 7 )
       {
@@ -176,7 +187,7 @@ public class Main3
   {
     Csv csv = new Csv( "semaine", "population", "deces", "taux",
         "taux normalise " + normalisedYear );
-    for( int year = 2015; year <= 2021; year++ )
+    for( int year = 2015; year <= lastYear; year++ )
     {
       for( int day = 1; day < DeathStats.MAX_DAY_COUNT - 6; day += 7 )
       {
@@ -218,7 +229,6 @@ public class Main3
   public static void printDeathPerYear(int normalisedYear) throws IOException
   {
     Csv csv = new Csv( "Annee", "population", "deces", "taux", "taux normalise " + normalisedYear );
-    int lastYear = 2021;
     for( int year = 1991; year <= lastYear; year++ )
     {
       long death = stats.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, 0, DeathStats.MAX_AGE, null );
