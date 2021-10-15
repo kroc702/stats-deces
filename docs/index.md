@@ -13,9 +13,12 @@
 ## Décès par an
 <div><canvas id="DecesParAn"></canvas></div>
 	
-Le nombre et le taux de décès annuel enregistré par l'insee au cours des 30 dernières années.
+Le nombre et le taux de décès annuel enregistré par l'insee au cours des 30 dernières années. Le taux de la dernière année est extrapolé sur l'année complète.
+
 L'écart entre le nombre et le taux s'explique par l'augmentation de la population.
+
 L'écart entre le taux et le taux normalisé s'explique par le veillissement de la population.
+
 	
 ## Décès par semaine
 <div><canvas id="DecesParSemaine"></canvas></div>

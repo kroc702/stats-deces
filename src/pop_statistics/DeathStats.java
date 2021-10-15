@@ -236,6 +236,20 @@ public class DeathStats
     return count;
   }
 
+
+  public int countDayWithoutDeath(int year)
+  {
+    int count = 0;
+    for( int iDay = 1; iDay <= MAX_DAY_COUNT; iDay++ )
+    {
+      if( getDeath( year, iDay, iDay, 0, MAX_AGE, null ) < 10 )
+      {
+        count++;
+      }
+    }
+    return count;
+  }
+
   public long getDeath(int year, int day, int age, Boolean isMale)
   {
     if( age < 0 || day <= 0 || day > MAX_DAY_COUNT || year < fromYear || year > toYear )

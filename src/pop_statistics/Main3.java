@@ -218,7 +218,8 @@ public class Main3
   public static void printDeathPerYear(int normalisedYear) throws IOException
   {
     Csv csv = new Csv( "Annee", "population", "deces", "taux", "taux normalise " + normalisedYear );
-    for( int year = 1991; year <= 2021; year++ )
+    int lastYear = 2021;
+    for( int year = 1991; year <= lastYear; year++ )
     {
       long death = stats.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, 0, DeathStats.MAX_AGE, null );
       long pop = pyramids.get( year ).get( 0, AgePyramid.MAX_AGE, null );
@@ -246,6 +247,15 @@ public class Main3
       for( int age = 0; age <= AgePyramid.MAX_AGE; age++ )
       {
         normalisedRate += rateAge[age] * pyramids.get( normalisedYear ).getRate( age, age, null );
+      }
+
+      // extrapole last year
+      if( year == lastYear )
+      {
+        float extrapolation = (float)DeathStats.MAX_DAY_COUNT
+            / (DeathStats.MAX_DAY_COUNT - stats.countDayWithoutDeath( lastYear ));
+        rate *= extrapolation;
+        normalisedRate *= extrapolation;
       }
 
       csv.addRow( year, pop, death, rate, normalisedRate );
