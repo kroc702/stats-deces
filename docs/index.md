@@ -30,6 +30,15 @@ Même chiffre que ci-dessus mais par semaine sur les dix dernières années.
 	
 La taux de décès pour chaque age.
 
+## Décès COVID par tranche d'age
+<div><canvas id="DecesCovidParAge"></canvas></div>
+
+nombre de décès lors d’une hospitalisation entre le 01/03/2020 et le 04/07/2021.
+
+source: [Santé public france, Point épidémiologique hebdomadaire n° 71 du 08 juillet 2021. p21](https://www.santepubliquefrance.fr/content/download/358653/3091329)
+
+## Activité hospitalière en 2020
+[![Hospitalisation en 2020](/images/Hospitalisation2020.png)](https://www.scansante.fr/applications/analyse-activite-nationale)
 
 ## Sources
 
@@ -37,6 +46,6 @@ La taux de décès pour chaque age.
 - [pyramide des ages](https://www.insee.fr/fr/outil-interactif/5014911/pyramide.htm)
 - [pyramide des ages 1991-2020](https://www.insee.fr/fr/statistiques/3312958)
 - [pyramide des ages 2021](https://www.insee.fr/fr/statistiques/2381472#graphique-figure1)
-
+- [Nombre quotidien de nouveaux décès avec diagnostic COVID-19 déclarés en 24h](https://geodes.santepubliquefrance.fr/#c=indicator&i=covid_hospit_incid.incid_dc&s=2021-07-19&t=a01&view=map2) (cf syntèse)
 
 

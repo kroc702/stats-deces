@@ -106,6 +106,37 @@ public class DeathStats
     }
   }
 
+  public void addMultipleDeaths(int deathYear, int deathDay, int age, boolean isMale,
+      int deathCount)
+  {
+    if( age > MAX_AGE )
+    {
+      age = MAX_AGE;
+    }
+    if( age < 0 || deathDay <= 0 || deathDay > MAX_DAY_COUNT || deathYear < fromYear
+        || deathYear > toYear )
+    {
+      Long count = ignoredRecords.get( deathYear );
+      if( count == null )
+      {
+        count = Long.valueOf( 0 );
+      }
+      count += deathCount;
+      ignoredRecords.put( deathYear, count );
+    }
+    else
+    {
+      if( isMale )
+      {
+        this.maleDeathCount[getDayIndex( deathYear, deathDay )][age] += deathCount;
+      }
+      else
+      {
+        this.femaleDeathCount[getDayIndex( deathYear, deathDay )][age] += deathCount;
+      }
+    }
+  }
+
   /**
    * 
    * @param rec

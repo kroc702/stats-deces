@@ -89,6 +89,11 @@ var configDecesParSemaine = {
 			pointBackgroundColor: 'transparent',
 			pointBorderColor: 'transparent'
 		}, {
+			yAxisID: 'deces',
+			borderColor: chartColors.red,
+			pointBackgroundColor: 'transparent',
+			pointBorderColor: 'transparent'
+		}, {
 			hidden: true,
 			yAxisID: 'taux',
 			borderColor: chartColors.blue,
@@ -242,5 +247,33 @@ window.onload = function() {
 
 	var ctx = document.getElementById('DecesParAge').getContext('2d');
 	new Chart(ctx, configDecesParAge);
+	
+	
+const data = {
+  labels: [
+    '75+',
+    '65-74',
+    '45-64',
+    '15-44',
+    '0-14'
+  ],
+  datasets: [{
+    label: 'nombre de décès lors d’une hospitalisation',
+    data: [61659, 14862, 7166, 640, 8],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+    ],
+    hoverOffset: 4
+  }]
+};
+  
+    var ctx = document.getElementById('DecesCovidParAge').getContext('2d');
+	new Chart(ctx, {
+	  type: 'pie',
+	  data: data,
+	});
+
 };
 

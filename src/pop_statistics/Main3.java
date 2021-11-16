@@ -1,5 +1,8 @@
 package pop_statistics;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +14,8 @@ import java.util.Map;
 public class Main3
 {
 
-  static DeathStats stats = null;
+  static DeathStats deathGlobal = null;
+  static DeathStats deathCovid = null;
   static Map<Integer, AgePyramid> pyramids = new HashMap<Integer, AgePyramid>();
 
   static int lastYear = 2021;
@@ -59,12 +63,30 @@ public class Main3
     return stats;
   }
 
+  public static DeathStats loadDeathFromCovidData() throws Exception
+  {
+    DateTimeFormatter dateFormater = DateTimeFormatter.ISO_LOCAL_DATE;
+    DeathStats stats = new DeathStats( 1991, 2021 );
 
+    FileReader fr = new FileReader( new File( "data/NombreDecesCOVID-19.csv" ) );
+    BufferedReader br = new BufferedReader( fr );
+    String line = null;
+    while( (line = br.readLine()) != null )
+    {
+      String[] linedata = line.split( ";" );
+      LocalDate date = LocalDate.from( dateFormater.parse( linedata[0] ) );
+      stats.addMultipleDeaths( date.getYear(), date.getDayOfYear(), 0, true,
+          Integer.parseInt( linedata[1] ) );
+    }
+    fr.close();
+
+    return stats;
+  }
 
   public static void printDeathPerAge() throws IOException
   {
     float extrapolation = (float)DeathStats.MAX_DAY_COUNT
-        / (DeathStats.MAX_DAY_COUNT - stats.countDayWithoutDeath( lastYear ));
+        / (DeathStats.MAX_DAY_COUNT - deathGlobal.countDayWithoutDeath( lastYear ));
     Csv csv = new Csv( "Age", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998",
         "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
         "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020",
@@ -75,10 +97,10 @@ public class Main3
       row.add( age );
       for( int year = 1991; year <= lastYear; year++ )
       {
-        long death = stats.getDeath( year, 0, DeathStats.MAX_DAY_COUNT, age, age, null );
+        long death = deathGlobal.getDeath( year, 0, DeathStats.MAX_DAY_COUNT, age, age, null );
         if( age == AgePyramid.MAX_AGE )
         {
-          death = stats.getDeath( year, 0, DeathStats.MAX_DAY_COUNT, age, DeathStats.MAX_AGE,
+          death = deathGlobal.getDeath( year, 0, DeathStats.MAX_DAY_COUNT, age, DeathStats.MAX_AGE,
               null );
         }
         long pop = pyramids.get( year ).get( age, age, null );
@@ -112,67 +134,67 @@ public class Main3
 
         int fromAge = 0;
         int toAge = 0;
-        long death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        long death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         long pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 1;
         toAge = 10;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 11;
         toAge = 20;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 21;
         toAge = 30;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 31;
         toAge = 40;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 41;
         toAge = 50;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 51;
         toAge = 60;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 61;
         toAge = 70;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 71;
         toAge = 80;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 81;
         toAge = 90;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
         fromAge = 91;
         toAge = DeathStats.MAX_AGE;
-        death = stats.getDeath( year, day, day + 6, fromAge, toAge, null );
+        death = deathGlobal.getDeath( year, day, day + 6, fromAge, toAge, null );
         pop = pyramids.get( year ).get( fromAge, toAge, null );
         row.add( death * 1000000f / pop );
 
@@ -185,14 +207,15 @@ public class Main3
 
   public static void printDeathPerWeek(int normalisedYear) throws IOException
   {
-    Csv csv = new Csv( "semaine", "population", "deces", "taux",
+    Csv csv = new Csv( "semaine", "population", "deces", "deces covid", "taux",
         "taux normalise " + normalisedYear );
     for( int year = 2015; year <= lastYear; year++ )
     {
       for( int day = 1; day < DeathStats.MAX_DAY_COUNT - 6; day += 7 )
       {
         String date = LocalDate.ofYearDay( year, day ).format( DateTimeFormatter.ISO_LOCAL_DATE );
-        long death = stats.getDeath( year, day, day + 6, 0, DeathStats.MAX_AGE, null );
+        long death = deathGlobal.getDeath( year, day, day + 6, 0, DeathStats.MAX_AGE, null );
+        long covidDeath = deathCovid.getDeath( year, day, day + 6, 0, DeathStats.MAX_AGE, null );
         long pop = pyramids.get( year ).get( 0, AgePyramid.MAX_AGE, null );
         float rate = death * 1000000f / pop;
 
@@ -204,11 +227,12 @@ public class Main3
         {
           if( age == AgePyramid.MAX_AGE )
           {
-            deathAge[age] = stats.getDeath( year, day, day + 6, age, DeathStats.MAX_AGE, null );
+            deathAge[age] = deathGlobal.getDeath( year, day, day + 6, age, DeathStats.MAX_AGE,
+                null );
           }
           else
           {
-            deathAge[age] = stats.getDeath( year, day, day + 6, age, age, null );
+            deathAge[age] = deathGlobal.getDeath( year, day, day + 6, age, age, null );
           }
           popAge[age] = pyramids.get( year ).get( age, age, null );
           rateAge[age] = deathAge[age] * 1000000d / popAge[age];
@@ -219,7 +243,7 @@ public class Main3
           normalisedRate += rateAge[age] * pyramids.get( normalisedYear ).getRate( age, age, null );
         }
 
-        csv.addRow( date, pop, death, rate, normalisedRate );
+        csv.addRow( date, pop, death, covidDeath, rate, normalisedRate );
       }
     }
     csv.print( "docs/results/DecesParSemaine.csv" );
@@ -231,7 +255,8 @@ public class Main3
     Csv csv = new Csv( "Annee", "population", "deces", "taux", "taux normalise " + normalisedYear );
     for( int year = 1991; year <= lastYear; year++ )
     {
-      long death = stats.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, 0, DeathStats.MAX_AGE, null );
+      long death = deathGlobal.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, 0, DeathStats.MAX_AGE,
+          null );
       long pop = pyramids.get( year ).get( 0, AgePyramid.MAX_AGE, null );
       float rate = death * 1000000f / pop;
 
@@ -243,12 +268,12 @@ public class Main3
       {
         if( age == AgePyramid.MAX_AGE )
         {
-          deathAge[age] = stats.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, age,
+          deathAge[age] = deathGlobal.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, age,
               DeathStats.MAX_AGE, null );
         }
         else
         {
-          deathAge[age] = stats.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, age, age, null );
+          deathAge[age] = deathGlobal.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, age, age, null );
         }
         popAge[age] = pyramids.get( year ).get( age, age, null );
         rateAge[age] = deathAge[age] * 1000000d / popAge[age];
@@ -263,7 +288,7 @@ public class Main3
       if( year == lastYear )
       {
         float extrapolation = (float)DeathStats.MAX_DAY_COUNT
-            / (DeathStats.MAX_DAY_COUNT - stats.countDayWithoutDeath( lastYear ));
+            / (DeathStats.MAX_DAY_COUNT - deathGlobal.countDayWithoutDeath( lastYear ));
         rate *= extrapolation;
         normalisedRate *= extrapolation;
       }
@@ -281,7 +306,8 @@ public class Main3
         "docs/results/PyramideDesAgesFemmes.csv" );
     // stats = loadDeathFromData();
     // stats.saveToJson( "docs/results/death-stats.json" );
-    stats = DeathStats.loadFromJson( "docs/results/death-stats.json" );
+    deathGlobal = DeathStats.loadFromJson( "docs/results/death-stats.json" );
+    deathCovid = loadDeathFromCovidData();
 
     printDeathPerWeek( 2021 );
     printDeathPerYear( 2021 );
