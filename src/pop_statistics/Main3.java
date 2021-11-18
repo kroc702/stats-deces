@@ -59,6 +59,7 @@ public class Main3
     stats.loadDeathRecords( inputFolder + "deces-2021-t1.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2021-t2.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2021-t3.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2021-m10.txt" );
 
     return stats;
   }
@@ -304,9 +305,9 @@ public class Main3
   {
     pyramids = AgePyramid.load( "docs/results/PyramideDesAgesHommes.csv",
         "docs/results/PyramideDesAgesFemmes.csv" );
-    // stats = loadDeathFromData();
-    // stats.saveToJson( "docs/results/death-stats.json" );
-    deathGlobal = DeathStats.loadFromJson( "docs/results/death-stats.json" );
+    deathGlobal = loadDeathFromData();
+    deathGlobal.saveToJson( "docs/results/death-stats.json" );
+    // deathGlobal = DeathStats.loadFromJson( "docs/results/death-stats.json" );
     deathCovid = loadDeathFromCovidData();
 
     printDeathPerWeek( 2021 );
