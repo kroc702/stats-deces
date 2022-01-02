@@ -60,6 +60,7 @@ public class Main3
     stats.loadDeathRecords( inputFolder + "deces-2021-t2.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2021-t3.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2021-m10.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2021-m11.txt" );
 
     return stats;
   }
