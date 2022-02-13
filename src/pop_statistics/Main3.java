@@ -18,7 +18,7 @@ public class Main3
   static DeathStats deathCovid = null;
   static Map<Integer, AgePyramid> pyramids = new HashMap<Integer, AgePyramid>();
 
-  static int lastYear = 2021;
+  static int lastYear = 2022;
 
 
   public static DeathStats loadDeathFromData() throws Exception
@@ -55,12 +55,9 @@ public class Main3
     stats.loadDeathRecords( inputFolder + "deces-2018.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2019.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2020.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2021.txt" );
 
-    stats.loadDeathRecords( inputFolder + "deces-2021-t1.txt" );
-    stats.loadDeathRecords( inputFolder + "deces-2021-t2.txt" );
-    stats.loadDeathRecords( inputFolder + "deces-2021-t3.txt" );
-    stats.loadDeathRecords( inputFolder + "deces-2021-m10.txt" );
-    stats.loadDeathRecords( inputFolder + "deces-2021-m11.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2022-m01.txt" );
 
     return stats;
   }
@@ -68,7 +65,7 @@ public class Main3
   public static DeathStats loadDeathFromCovidData() throws Exception
   {
     DateTimeFormatter dateFormater = DateTimeFormatter.ISO_LOCAL_DATE;
-    DeathStats stats = new DeathStats( 1991, 2021 );
+    DeathStats stats = new DeathStats( 1991, lastYear );
 
     FileReader fr = new FileReader( new File( "data/NombreDecesCOVID-19.csv" ) );
     BufferedReader br = new BufferedReader( fr );
@@ -92,7 +89,7 @@ public class Main3
     Csv csv = new Csv( "Age", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998",
         "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
         "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020",
-        "2021" );
+        "2021", "2022" );
     for( int age = 0; age <= AgePyramid.MAX_AGE; age++ )
     {
       List<Object> row = new ArrayList<Object>();
