@@ -49,4 +49,4 @@ source: [Santé public france, Point épidémiologique hebdomadaire n° 71 du 08
 - [Nombre quotidien de nouveaux décès avec diagnostic COVID-19 déclarés en 24h](https://geodes.santepubliquefrance.fr/#c=indicator&i=covid_hospit_incid.incid_dc&s=2021-07-19&t=a01&view=map2) (cf syntèse)
 
 
-Dernière mise à jours: 14/02/2022
+Dernière mise à jours: 28/06/2022

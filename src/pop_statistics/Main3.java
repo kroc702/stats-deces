@@ -19,12 +19,13 @@ public class Main3
   static Map<Integer, AgePyramid> pyramids = new HashMap<Integer, AgePyramid>();
 
   static int lastYear = 2022;
+  static int firstYear = 1991;
 
 
   public static DeathStats loadDeathFromData() throws Exception
   {
     final String inputFolder = "E:/perso/data-deces/";
-    DeathStats stats = new DeathStats( 1991, 2021 );
+    DeathStats stats = new DeathStats( firstYear, lastYear );
     stats.loadDeathRecords( inputFolder + "deces-1991.txt" );
     stats.loadDeathRecords( inputFolder + "deces-1992.txt" );
     stats.loadDeathRecords( inputFolder + "deces-1993.txt" );
@@ -57,7 +58,9 @@ public class Main3
     stats.loadDeathRecords( inputFolder + "deces-2020.txt" );
     stats.loadDeathRecords( inputFolder + "deces-2021.txt" );
 
-    stats.loadDeathRecords( inputFolder + "deces-2022-m01.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2022-t1.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2022-m04.txt" );
+    stats.loadDeathRecords( inputFolder + "deces-2022-m05.txt" );
 
     return stats;
   }
@@ -65,7 +68,7 @@ public class Main3
   public static DeathStats loadDeathFromCovidData() throws Exception
   {
     DateTimeFormatter dateFormater = DateTimeFormatter.ISO_LOCAL_DATE;
-    DeathStats stats = new DeathStats( 1991, lastYear );
+    DeathStats stats = new DeathStats( firstYear, lastYear );
 
     FileReader fr = new FileReader( new File( "data/NombreDecesCOVID-19.csv" ) );
     BufferedReader br = new BufferedReader( fr );
@@ -86,15 +89,19 @@ public class Main3
   {
     float extrapolation = (float)DeathStats.MAX_DAY_COUNT
         / (DeathStats.MAX_DAY_COUNT - deathGlobal.countDayWithoutDeath( lastYear ));
-    Csv csv = new Csv( "Age", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998",
-        "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009",
-        "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020",
-        "2021", "2022" );
+    Csv csv = new Csv();
+    String[] headers = new String[lastYear - firstYear + 2];
+    headers[0] = "Age";
+    for( int i = 0; i <= lastYear - firstYear; i++ )
+    {
+      headers[i + 1] = "" + (firstYear + i);
+    }
+    csv.setHeaders( headers );
     for( int age = 0; age <= AgePyramid.MAX_AGE; age++ )
     {
       List<Object> row = new ArrayList<Object>();
       row.add( age );
-      for( int year = 1991; year <= lastYear; year++ )
+      for( int year = firstYear; year <= lastYear; year++ )
       {
         long death = deathGlobal.getDeath( year, 0, DeathStats.MAX_DAY_COUNT, age, age, null );
         if( age == AgePyramid.MAX_AGE )
@@ -252,7 +259,7 @@ public class Main3
   public static void printDeathPerYear(int normalisedYear) throws IOException
   {
     Csv csv = new Csv( "Annee", "population", "deces", "taux", "taux normalise " + normalisedYear );
-    for( int year = 1991; year <= lastYear; year++ )
+    for( int year = firstYear; year <= lastYear; year++ )
     {
       long death = deathGlobal.getDeath( year, 1, DeathStats.MAX_DAY_COUNT, 0, DeathStats.MAX_AGE,
           null );
